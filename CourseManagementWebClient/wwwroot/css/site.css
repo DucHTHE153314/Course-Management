@@ -280,29 +280,31 @@ nav {
     }
 
 .form-ui {
-    align-items: center;
     justify-content: center;
     box-shadow: 2px 4px 10px 10px #eee;
     width: calc(60vw);
-    height: 500px;
+    height: auto;
+    min-height: 400px;
     margin: auto;
     border-radius: 16px;
 }
-
-    .form-ui img {
-        height: 500px;
-        width: calc(30vw);
-        border-top-right-radius: 16px;
-        border-bottom-right-radius: 16px;
-    }
-
     .form-ui > div.has-img {
         padding: 0;
         border-left: 2px solid #dedede;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
     }
 
     .form-ui > div:not(.has-img) {
         padding: 20px;
         box-sizing: border-box;
         height: 100%;
+    }
+
+    .form-ui .text-danger{
+        height: 16px;
+        display: block;
     }

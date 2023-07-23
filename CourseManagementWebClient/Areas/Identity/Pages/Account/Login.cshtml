@@ -38,7 +38,8 @@
                     <button id="login-submit" type="submit" class="button cta w-100 btn btn-lg btn-primary">Login</button>
                 </div>
                 <div class="form-floating button cta url">
-                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a>
+                    <a asp-area="Identity" asp-page="/Account/ExternalLogin" asp-route-provider="Google" asp-route-returnUrl="@Model.ReturnUrl">Log in with Google</a>
+                    @*<a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register</a>*@
                 </div>
                 <div>
                     <p>
@@ -48,8 +49,7 @@
             </form>
         </section>
     </div>
-    <div class="col-md-6 has-img">
-        <img src="https://i.pinimg.com/564x/63/ac/0f/63ac0f1f6b43cadafa12728274fa1075.jpg"/>
+    <div class="col-md-6 has-img" style="background-image:url(https://i.pinimg.com/564x/63/ac/0f/63ac0f1f6b43cadafa12728274fa1075.jpg);">
     </div>
 </div>
 

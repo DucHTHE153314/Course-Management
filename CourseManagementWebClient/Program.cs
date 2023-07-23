@@ -1,9 +1,12 @@
 using CourseManagementWebClientWebClient.DataHelper;
 using CourseManagementWebClientWebClient.Data;
 using CourseManagementWebClientWebClient.Models;
+using CourseManagementWebClientWebClient.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using CourseManagementWebClientWebClient.Services.EmailService;
+using CourseManagementWebClient.Services.EmailService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,12 +15,16 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.Configure<GoogleCredentials>(builder.Configuration.GetSection("GoogleCredentials"));
 
+// Add email service
 builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
     .AddDefaultUI()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<UserManager<AppUser>>();
 builder.Services.AddScoped<RoleManager<IdentityRole>>();
 builder.Services.AddControllersWithViews();
@@ -27,6 +34,15 @@ builder.Services.AddSession(options =>
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+builder.Services.AddAuthentication()
+        .AddGoogle(options =>
+        {
+            var googleAuthNSection = builder.Configuration.GetSection("GoogleCredentials");
+
+            options.ClientId = googleAuthNSection["ClientId"];
+            options.ClientSecret = googleAuthNSection["ClientSecret"];
+            options.CallbackPath = "/Identity/Account/ExternalLogin"; // Verify this matches the registered redirect_uri
+        });
 
 var app = builder.Build();
 
