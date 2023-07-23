@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Upload Material";
+}
+
+<form method="post" enctype="multipart/form-data" asp-action="UploadMaterial">
+    <div>
+        <input type="number" name="id" value="@Model" hidden/>
+        <label for="file">Select a file to upload:</label>
+        <input type="file" name="file" id="file" />
+    </div>
+    <p>@ViewData["Message"]</p>
+    <input type="submit" value="Upload" class="button cta btn btn-primary"/>
+</form>

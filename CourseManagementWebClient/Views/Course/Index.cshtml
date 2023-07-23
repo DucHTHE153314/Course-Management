@@ -1,0 +1,80 @@
+﻿@using CourseManagementWebClientWebClient.Data;
+@model IEnumerable<BussinessObject.DTOs.CourseDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<String> roles = (List<String>)ViewData["UserRoles"];
+}
+
+<h1>Courses</h1>
+@if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
+                           || roles.Contains(Role.TEACHER.ToString())))
+                            {
+<p class="side-bar">
+    <a class="button cta" asp-action="Create">Create New</a>
+</p>
+                            }
+<p>@ViewData["Message"]</p>
+<p>Click Details Course For Topic And Materials Of Course</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id )
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    <div class="page-action">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 16px; height: 16px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1"><path d="M512 305.7c-57.3 0-103.8-46.5-103.8-103.8S454.7 98.2 512 98.2 615.8 144.7 615.8 202 569.3 305.7 512 305.7z m0 311.3c-57.3 0-103.8-46.5-103.8-103.8S454.7 409.5 512 409.5 615.8 456 615.8 513.3 569.3 617 512 617z m0 311.3c-57.3 0-103.8-46.5-103.8-103.8S454.7 720.8 512 720.8s103.8 46.5 103.8 103.8S569.3 928.3 512 928.3z"/></svg>
+                        <div class="action-items">
+                            @if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
+                           || roles.Contains(Role.TEACHER.ToString())))
+                            {
+                                <a class="action-item" asp-action="Edit" asp-route-id="@item.Id">
+                                    Edit
+                                </a>
+                            }
+                            <a class="action-item" asp-action="Details" asp-route-id="@item.Id">
+                                Details
+                            </a>
+                            @if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
+                           || roles.Contains(Role.TEACHER.ToString())))
+                            {
+                                <a class="action-item" asp-action="Delete" asp-route-id="@item.Id">
+                                    Delete
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
