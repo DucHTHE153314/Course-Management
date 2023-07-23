@@ -37,7 +37,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="tb-body-item">
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
@@ -67,7 +67,7 @@
                             @if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
                            || roles.Contains(Role.TEACHER.ToString())))
                             {
-                                <a class="action-item" asp-action="Delete" asp-route-id="@item.Id">
+                                <a class="action-item" onclick="return confirm('Allow delete course!');" asp-action="Delete" asp-route-id="@item.Id">
                                     Delete
                                 </a>
                             }
@@ -78,3 +78,7 @@
         }
     </tbody>
 </table>
+<div class="empty-state">
+    <img src="https://i.pinimg.com/564x/a1/0b/cd/a10bcd7d2e399ac14ea6908281a2bb1a.jpg"/>
+    <p>Nothing to show!</p>
+</div>

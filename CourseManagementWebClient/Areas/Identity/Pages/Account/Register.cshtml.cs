@@ -79,7 +79,7 @@ namespace CourseManagementWebClientWebClient.Areas.Identity.Pages.Account
 
             [Required]
             [DataType(DataType.Text)]
-            [Display(Name = "Fullname")]
+            [Display(Name = "Username")]
             public string Fullname { get; set; }
 
             [Required]

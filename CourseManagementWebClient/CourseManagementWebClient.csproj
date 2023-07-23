@@ -5,6 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<UserSecretsId>aspnet-CourseManagementWebClientWebClientWebClient-d2b4b838-05b8-4330-8f84-a764b6a4c99c</UserSecretsId>
+		<PackageProjectUrl>coursemanagement.com</PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>

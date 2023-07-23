@@ -32,12 +32,12 @@
     </dl>
     <hr />
     @if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
-                           || roles.Contains(Role.TEACHER.ToString())))
-                            {
-            <p>
-                <a asp-controller="Topic" asp-action="Create" asp-route-id="@Model.Id" class="button cta btn btn-primary">Add Topic</a>
-            </p>
-                            }
+    || roles.Contains(Role.TEACHER.ToString())))
+    {
+        <p>
+            <a asp-controller="Topic" asp-action="Create" asp-route-id="@Model.Id" class="button cta btn btn-primary">Add Topic</a>
+        </p>
+    }
     <table class="table">
         <thead>
             <tr>
@@ -65,7 +65,7 @@
         <tbody>
             @foreach (var item in Model.Topics)
             {
-                <tr>
+                <tr class="tb-body-item">
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
@@ -86,38 +86,38 @@
                     </td>
                     <td>
                         <div class="page-action">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 16px; height: 16px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1"><path d="M512 305.7c-57.3 0-103.8-46.5-103.8-103.8S454.7 98.2 512 98.2 615.8 144.7 615.8 202 569.3 305.7 512 305.7z m0 311.3c-57.3 0-103.8-46.5-103.8-103.8S454.7 409.5 512 409.5 615.8 456 615.8 513.3 569.3 617 512 617z m0 311.3c-57.3 0-103.8-46.5-103.8-103.8S454.7 720.8 512 720.8s103.8 46.5 103.8 103.8S569.3 928.3 512 928.3z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-icon" style="width: 16px; height: 16px;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1"><path d="M512 305.7c-57.3 0-103.8-46.5-103.8-103.8S454.7 98.2 512 98.2 615.8 144.7 615.8 202 569.3 305.7 512 305.7z m0 311.3c-57.3 0-103.8-46.5-103.8-103.8S454.7 409.5 512 409.5 615.8 456 615.8 513.3 569.3 617 512 617z m0 311.3c-57.3 0-103.8-46.5-103.8-103.8S454.7 720.8 512 720.8s103.8 46.5 103.8 103.8S569.3 928.3 512 928.3z" /></svg>
                             <div class="action-items">
                                 @if (item.MaterialDTO == null)
-                            {
-                                <a class="action-item" asp-controller="Topic" asp-action="UploadMaterial" asp-route-id="@item.Id">
-                                    Upload Material
-                                </a>
-                            }
-                            @if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
-                           || roles.Contains(Role.TEACHER.ToString())))
-                            {
-                                <a class="action-item" asp-controller="Topic" asp-action="Edit" asp-route-id="@item.Id">
-                                    Edit
-                                </a>
-                            }
+                                {
+                                    <a class="action-item" asp-controller="Topic" asp-action="UploadMaterial" asp-route-id="@item.Id">
+                                        Upload Material
+                                    </a>
+                                }
+                                @if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
+                               || roles.Contains(Role.TEACHER.ToString())))
+                                {
+                                    <a class="action-item" asp-controller="Topic" asp-action="Edit" asp-route-id="@item.Id">
+                                        Edit
+                                    </a>
+                                }
 
-                            <a class="action-item" asp-controller="Topic" asp-action="Details" asp-route-id="@item.Id">
-                                Details
-                            </a>
-                            @if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
-                           || roles.Contains(Role.TEACHER.ToString())))
-                            {
-                                <a class="action-item" asp-action="Delete" asp-route-id="@item.Id">
-                                    Delete
+                                <a class="action-item" asp-controller="Topic" asp-action="Details" asp-route-id="@item.Id">
+                                    Details
                                 </a>
-                            }
-                            @if (item.MaterialDTO != null)
-                            {
-                                <a class="action-item" asp-controller="Topic" asp-action="Dowload" asp-route-id="@item.Id">
-                                    Dowload Material
-                                </a>
-                            }
+                                @if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
+                               || roles.Contains(Role.TEACHER.ToString())))
+                                {
+                                    <a class="action-item" onclick="return confirm('Allow delete course!');"  asp-action="Delete" asp-route-id="@item.Id">
+                                        Delete
+                                    </a>
+                                }
+                                @if (item.MaterialDTO != null)
+                                {
+                                    <a class="action-item" asp-controller="Topic" asp-action="Dowload" asp-route-id="@item.Id">
+                                        Dowload Material
+                                    </a>
+                                }
                             </div>
                         </div>
                     </td>
@@ -125,12 +125,16 @@
             }
         </tbody>
     </table>
+    <div class="empty-state">
+        <img src="https://i.pinimg.com/564x/a1/0b/cd/a10bcd7d2e399ac14ea6908281a2bb1a.jpg" />
+        <p>Nothing to show!</p>
+    </div>
 </div>
 <div>
     @if (roles != null && (roles.Contains(Role.SUPERADMIN.ToString())
-                           || roles.Contains(Role.TEACHER.ToString())))
-                            {
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
-                            }
+    || roles.Contains(Role.TEACHER.ToString())))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>
+    }
     <a asp-action="Index">Back to List</a>
 </div>

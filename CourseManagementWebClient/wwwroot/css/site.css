@@ -80,7 +80,10 @@ h3 {
 a {
     text-decoration: none !important;
 }
-
+.button-group{
+    display: flex;
+    gap: 10px;
+}
 .button {
     position: relative;
     box-sizing: border-box;
@@ -99,6 +102,15 @@ a {
         text-align: center;
         font-weight: 500;
     }
+        .button.cta.-danger {
+            border-color: #c50000;
+            color: #c50000;
+        }
+            .button.cta.-danger:hover {
+                background-color: #c50000;
+                color: #fff;
+                border-color: #c50000;
+            }
 
         .button.cta:hover {
             background-color: #63afd7;
@@ -154,7 +166,13 @@ a {
     border-radius: 4px;
     margin-bottom: 20px;
 }
-
+.page-section.not-cta{
+    width: 400px;
+}
+    .page-section.not-cta img {
+        width: 300px;
+        height: 300px;
+    }
     .page-section:hover {
         background: #d9f3ff;
         color: #666 !important;
@@ -308,3 +326,17 @@ nav {
         height: 16px;
         display: block;
     }
+.empty-state {
+    display: none;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    color: #666666;
+}
+    .empty-state img {
+        width: 200px;
+        height: 200px;
+    }
+table:not(:has(.tb-body-item)) ~ .empty-state{
+    display: block;
+}

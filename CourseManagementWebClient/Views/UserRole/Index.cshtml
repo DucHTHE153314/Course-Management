@@ -23,7 +23,7 @@
     <tbody>
         @foreach (var user in Model)
         {
-        <tr>
+        <tr class="tb-body-item">
             <td>@user.UserName</td>
             <td>@user.Email</td>
             <td>@string.Join(" , ", user.Roles.ToList())</td>
@@ -35,3 +35,7 @@
         }
     </tbody>
 </table>
+<div class="empty-state">
+    <img src="https://i.pinimg.com/564x/a1/0b/cd/a10bcd7d2e399ac14ea6908281a2bb1a.jpg"/>
+    <p>Nothing to show!</p>
+</div>

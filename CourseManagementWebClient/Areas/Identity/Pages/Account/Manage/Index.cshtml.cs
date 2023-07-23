@@ -119,6 +119,7 @@ namespace CourseManagementWebClientWebClient.Areas.Identity.Pages.Account.Manage
 
             user.Address = Input.Address;
             await _signInManager.RefreshSignInAsync(user);
+            await _userManager.UpdateAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
         }
